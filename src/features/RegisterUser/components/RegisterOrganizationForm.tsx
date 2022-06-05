@@ -1,18 +1,21 @@
-import React from "react";
-import { TextInput, View } from "react-native";
+import React, { useState } from "react";
+import { Image, TextInput, View } from "react-native";
 import { useForm, Controller } from "react-hook-form";
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
 import Typography from "../../../shared/components/Typography/Typography";
 import TouchableButton from "../../../shared/components/TouchableButton/TouchableButton";
 import theme from "../../../shared/theme/theme";
-import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
+import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
+import * as ImagePicker from "expo-image-picker";
+import { AddImageButton } from "./AddImage/AddImage.styled";
 
 interface FormData {
   completeName: string;
   email: string;
   password: string;
   confirmPassword: string;
+  image: string;
 }
 
 const schema = yup
@@ -24,10 +27,28 @@ const schema = yup
       .string()
       .oneOf([yup.ref("password"), null], "Passwords must match")
       .required(),
+    image: yup.string(),
   })
   .required();
 
 export const RegisterOrganizationForm = ({}) => {
+  const [image, setImage] = useState("null");
+
+  const pickImage = async () => {
+    let result = await ImagePicker.launchImageLibraryAsync({
+      mediaTypes: ImagePicker.MediaTypeOptions.All,
+      allowsEditing: true,
+      aspect: [4, 3],
+      quality: 1,
+    });
+
+    console.log(result);
+
+    if (!result.cancelled) {
+      setImage(result.uri);
+    }
+  };
+
   const {
     control,
     handleSubmit,
@@ -35,10 +56,23 @@ export const RegisterOrganizationForm = ({}) => {
   } = useForm<FormData>({
     resolver: yupResolver(schema),
   });
-  const onSubmit = (data: object) => console.log(data);
+  const onSubmit = (data: object) => console.log(data, image);
 
   return (
     <KeyboardAwareScrollView>
+      <View style={{ flex: 1, alignItems: "center", justifyContent: "center" }}>
+        <AddImageButton onPress={pickImage}>
+          {image === "null" ? (
+            <Image source={require("../assets/addImage.png")} />
+          ) : (
+            <Image
+              source={{ uri: image }}
+              style={{ width: 86, height: 86, borderRadius: 100 }}
+            />
+          )}
+        </AddImageButton>
+      </View>
+
       <Typography variant="bodyRegular" color="blue" semiBold>
         Nome
       </Typography>

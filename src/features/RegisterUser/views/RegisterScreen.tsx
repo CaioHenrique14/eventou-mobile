@@ -14,12 +14,11 @@ import { ScrollView, TouchableOpacity } from "react-native-gesture-handler";
 import { RegisterOrganizationForm } from "../components/RegisterOrganizationForm";
 import FormTypeSelector from "../components/FormTypeSelector/FormTypeSelector";
 import { FormSelectorView } from "../components/FormSelectorView/FormSelector.styled";
-
 type RegisterScreenProps = StackScreenProps<RootStackParamList, "Register">;
 
 export const RegisterScreen: React.FC<RegisterScreenProps> = ({}) => {
-  const [formType, setFormType] = useState("");
-  const [activeUser, setActiveUser] = useState(false);
+  const [formType, setFormType] = useState("user");
+  const [activeUser, setActiveUser] = useState(true);
   const [activeOrg, setActiveOrg] = useState(false);
 
   return (
@@ -60,6 +59,7 @@ export const RegisterScreen: React.FC<RegisterScreenProps> = ({}) => {
           </FormSelectorView>
         </ImageBackground>
         <RegisterFormContainer>
+          
           {formType === "user" ? (
             <RegisterForm />
           ) : (

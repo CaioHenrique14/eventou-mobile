@@ -19,18 +19,12 @@ export default function App() {
         console.warn(e);
       } finally {
         setIsReady(true);
-        onLayoutRootView()
+        await SplashScreen.hideAsync()
       }
     }
 
     prepare();
   }, []);
-
-  const onLayoutRootView = useCallback(async () => {
-    if (IsReady) {
-      await SplashScreen.hideAsync();
-    }
-  }, [IsReady]);
 
   if (!IsReady) {
     return null;
