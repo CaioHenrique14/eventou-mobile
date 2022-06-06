@@ -9,6 +9,7 @@ import theme from "../../../shared/theme/theme";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 import { AddImageButton } from "./AddImage/AddImage.styled";
 import * as ImagePicker from "expo-image-picker";
+import moment from "moment";
 
 interface FormData {
   completeName: string;
@@ -22,12 +23,13 @@ const schema = yup
   .object({
     completeName: yup.string().required(),
     email: yup.string().email().required(),
-    birthDate: yup.string().required(),
+    birthDate: yup.string().required().test("invalid",
+    (date) => moment().diff(moment(date), "years") >= 18),
     password: yup.string().required(),
     confirmPassword: yup
       .string()
       .oneOf([yup.ref("password"), null], "Passwords must match")
-      .required(),
+      .required()
   })
   .required();
 
@@ -170,7 +172,7 @@ export const RegisterForm = ({}) => {
         )}
         name="birthDate"
       />
-      {errors.birthDate && (
+      {errors.birthDate?.type === 'required' && (
         <Typography
           variant="bodySmall"
           color="white"
@@ -179,6 +181,17 @@ export const RegisterForm = ({}) => {
           Campo obrigatório.
         </Typography>
       )}
+      {errors.birthDate?.type === 'invalid' && (
+        <Typography
+          variant="bodySmall"
+          color="white"
+          style={{ marginTop: -25, marginBottom: 25 }}
+        >
+          Data de nascimento inválida.
+        </Typography>
+      )}
+
+
       <Typography variant="bodyRegular" color="blue" semiBold>
         Senha
       </Typography>
