@@ -3,7 +3,7 @@ import theme from "../../../../shared/theme/theme";
 
 export const AddImageButton = styled.TouchableHighlight`
   background-color: ${theme.palette.lightGrey};
-  border-radius: 100%;
+  border-radius: 100px;
   width: 86px;
   height: 86px;
   justify-content: center;
