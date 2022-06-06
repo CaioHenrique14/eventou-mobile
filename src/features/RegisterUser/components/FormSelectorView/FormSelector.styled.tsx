@@ -5,7 +5,6 @@ export const FormSelectorView = styled.View`
   background-color: ${theme.palette.lightGrey};
   width: 100%;
   flex-direction: row;
-  flex-wrap: wrap;
   border-top-left-radius: 24px;
   border-top-right-radius: 24px;
 `;

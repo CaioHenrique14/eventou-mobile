@@ -1,6 +1,4 @@
 import React from "react";
-import { View } from "react-native";
-import theme from "../../../../shared/theme/theme";
 import Typography from "../../../../shared/components/Typography/Typography";
 import {FormSelectorActive } from "./FormTypeSelector.styled";
 export interface ButtonProps {
