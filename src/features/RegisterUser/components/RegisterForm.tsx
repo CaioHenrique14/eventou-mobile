@@ -1,15 +1,17 @@
-import React, { useState } from "react";
-import { Image, TextInput, View } from "react-native";
-import { useForm, Controller } from "react-hook-form";
-import * as yup from "yup";
-import { yupResolver } from "@hookform/resolvers/yup";
-import Typography from "../../../shared/components/Typography/Typography";
-import TouchableButton from "../../../shared/components/TouchableButton/TouchableButton";
-import theme from "../../../shared/theme/theme";
-import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
-import { AddImageButton } from "./AddImage/AddImage.styled";
-import * as ImagePicker from "expo-image-picker";
-import moment from "moment";
+/* eslint-disable prettier/prettier */
+import React, { useState } from 'react';
+import { Alert, Image, TextInput, View } from 'react-native';
+import { useForm, Controller } from 'react-hook-form';
+import * as yup from 'yup';
+import { yupResolver } from '@hookform/resolvers/yup';
+import Typography from '../../../shared/components/Typography/Typography';
+import TouchableButton from '../../../shared/components/TouchableButton/TouchableButton';
+import theme from '../../../shared/theme/theme';
+import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
+import { AddImageButton } from './AddImage/AddImage.styled';
+import * as ImagePicker from 'expo-image-picker';
+import moment from 'moment';
+import axios from 'axios';
 
 interface FormData {
   completeName: string;
@@ -23,18 +25,18 @@ const schema = yup
   .object({
     completeName: yup.string().required(),
     email: yup.string().email().required(),
-    birthDate: yup.string().required().test("invalid",
-    (date) => moment().diff(moment(date), "years") >= 18),
+    birthDate: yup.string().required().test('invalid',
+    (date) => moment().diff(moment(date), 'years') >= 18),
     password: yup.string().required(),
     confirmPassword: yup
       .string()
-      .oneOf([yup.ref("password"), null], "Passwords must match")
-      .required()
+      .oneOf([yup.ref('password'), null], 'Passwords must match')
+      .required(),
   })
   .required();
 
 export const RegisterForm = ({}) => {
-  const [image, setImage] = useState("null");
+  const [image, setImage] = useState('null');
   const pickImage = async () => {
     let result = await ImagePicker.launchImageLibraryAsync({
       mediaTypes: ImagePicker.MediaTypeOptions.All,
@@ -55,14 +57,35 @@ export const RegisterForm = ({}) => {
   } = useForm<FormData>({
     resolver: yupResolver(schema),
   });
-  const onSubmit = (data: object) => console.log(data);
+    const onSubmit = (element: object) => {
+      const data = {
+        name: element.completeName,
+        email: element.email,
+        role: 'user',
+        birthDate: element.birthDate,
+        password: element.password,
+      };
+      axios.post('http://10.125.131.212:3000/user', data).then(() => {
+        Alert.alert(
+          'Sucesso',
+          'Seu cadastro foi realizado com sucesso',
+          [
+            {
+              text: 'Fechar',
+              onPress: () => console.log('Cancel Pressed'),
+              style: 'cancel',
+            },
+            { text: 'OK', onPress: () => console.log('OK Pressed') },
+          ]
+        );});
+  };
 
   return (
     <KeyboardAwareScrollView>
-      <View style={{ flex: 1, alignItems: "center", justifyContent: "center" }}>
+      <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
         <AddImageButton onPress={pickImage}>
-          {image === "null" ? (
-            <Image source={require("../assets/addImage.png")} />
+          {image === 'null' ? (
+            <Image source={require('../assets/addImage.png')} />
           ) : (
             <Image
               source={{ uri: image }}
@@ -80,17 +103,17 @@ export const RegisterForm = ({}) => {
           <TextInput
             style={{
               borderColor: theme.palette.blue,
-              borderStyle: "solid",
+              borderStyle: 'solid',
               borderBottomWidth: 1,
               marginBottom: 30,
-              color: "#979797",
+              color: '#979797',
               height: 30,
             }}
             onBlur={onBlur}
             onChangeText={onChange}
             value={value}
             placeholder="Exemplo: Camila Freitas"
-            placeholderTextColor={"#979797"}
+            placeholderTextColor={'#979797'}
           />
         )}
         name="completeName"
@@ -114,22 +137,22 @@ export const RegisterForm = ({}) => {
           <TextInput
             style={{
               borderColor: theme.palette.blue,
-              borderStyle: "solid",
+              borderStyle: 'solid',
               borderBottomWidth: 1,
               marginBottom: 30,
-              color: "#979797",
+              color: '#979797',
               height: 30,
             }}
             onBlur={onBlur}
             onChangeText={onChange}
             value={value}
             placeholder="Exemplo: email@email.com"
-            placeholderTextColor={"#979797"}
+            placeholderTextColor={'#979797'}
           />
         )}
         name="email"
       />
-      {errors.email?.type == "required" && (
+      {errors.email?.type == 'required' && (
         <Typography
           variant="bodySmall"
           color="white"
@@ -138,7 +161,7 @@ export const RegisterForm = ({}) => {
           Campo obrigatório.
         </Typography>
       )}
-      {errors.email?.type == "email" && (
+      {errors.email?.type == 'email' && (
         <Typography
           variant="bodySmall"
           color="white"
@@ -157,17 +180,17 @@ export const RegisterForm = ({}) => {
           <TextInput
             style={{
               borderColor: theme.palette.blue,
-              borderStyle: "solid",
+              borderStyle: 'solid',
               borderBottomWidth: 1,
               marginBottom: 30,
-              color: "#979797",
+              color: '#979797',
               height: 30,
             }}
             onBlur={onBlur}
             onChangeText={onChange}
             value={value}
             placeholder="Exemplo: 12/12/2000"
-            placeholderTextColor={"#979797"}
+            placeholderTextColor={'#979797'}
           />
         )}
         name="birthDate"
@@ -191,7 +214,6 @@ export const RegisterForm = ({}) => {
         </Typography>
       )}
 
-
       <Typography variant="bodyRegular" color="blue" semiBold>
         Senha
       </Typography>
@@ -202,17 +224,17 @@ export const RegisterForm = ({}) => {
           <TextInput
             style={{
               borderColor: theme.palette.blue,
-              borderStyle: "solid",
+              borderStyle: 'solid',
               borderBottomWidth: 1,
               marginBottom: 30,
-              color: "#979797",
+              color: '#979797',
               height: 30,
             }}
             onBlur={onBlur}
             onChangeText={onChange}
             value={value}
             placeholder="Digite sua senha"
-            placeholderTextColor={"#979797"}
+            placeholderTextColor={'#979797'}
             secureTextEntry={true}
           />
         )}
@@ -238,23 +260,23 @@ export const RegisterForm = ({}) => {
           <TextInput
             style={{
               borderColor: theme.palette.blue,
-              borderStyle: "solid",
+              borderStyle: 'solid',
               borderBottomWidth: 1,
               marginBottom: 30,
-              color: "#979797",
+              color: '#979797',
               height: 30,
             }}
             onBlur={onBlur}
             onChangeText={onChange}
             value={value}
             placeholder="Digite sua senha"
-            placeholderTextColor={"#979797"}
+            placeholderTextColor={'#979797'}
             secureTextEntry={true}
           />
         )}
         name="confirmPassword"
       />
-      {errors.confirmPassword?.type === "oneOf" && (
+      {errors.confirmPassword?.type === 'oneOf' && (
         <Typography
           variant="bodySmall"
           color="white"
@@ -263,7 +285,7 @@ export const RegisterForm = ({}) => {
           As senhas devem corresponder.
         </Typography>
       )}
-      {errors.confirmPassword?.type === "required" && (
+      {errors.confirmPassword?.type === 'required' && (
         <Typography
           variant="bodySmall"
           color="white"
