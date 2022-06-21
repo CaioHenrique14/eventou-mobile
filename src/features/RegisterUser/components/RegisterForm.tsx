@@ -57,7 +57,7 @@ export const RegisterForm = ({}) => {
   } = useForm<FormData>({
     resolver: yupResolver(schema),
   });
-    const onSubmit = (element: object) => {
+    const onSubmit = (element: FormData) => {
       const data = {
         name: element.completeName,
         email: element.email,
@@ -65,7 +65,7 @@ export const RegisterForm = ({}) => {
         birthDate: element.birthDate,
         password: element.password,
       };
-      axios.post('http://10.125.131.212:3000/user', data).then(() => {
+      axios.post('http://192.168.1.4:3000/user', data).then(() => {
         Alert.alert(
           'Sucesso',
           'Seu cadastro foi realizado com sucesso',

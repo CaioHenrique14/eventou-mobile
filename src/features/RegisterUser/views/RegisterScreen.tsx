@@ -54,7 +54,7 @@ export const RegisterScreen: React.FC<RegisterScreenProps> = ({}) => {
                 setActiveUser(false);
               }}
             >
-              <FormTypeSelector text="Organização" actived={activeOrg} />
+              <FormTypeSelector text="Organizador" actived={activeOrg} />
             </TouchableOpacity>
           </FormSelectorView>
         </ImageBackground>
