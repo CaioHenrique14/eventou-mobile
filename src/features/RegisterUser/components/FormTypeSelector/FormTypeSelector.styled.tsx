@@ -7,7 +7,7 @@ export const FormSelectorActive = styled.TouchableHighlight<{
   background-color: ${({ active }) =>
     active ? theme.palette.blue : theme.palette.lightGrey}; 
 height: 46px;
-width: 195px;
+width: 205px;
 border-top-left-radius: 24px;
 border-top-right-radius: 24px;
 justify-content: center;

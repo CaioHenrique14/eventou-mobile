@@ -12,12 +12,13 @@ const Stack = createStackNavigator<RootStackParamList>();
 const RegisterFeatureNavigation = () => (
   <Stack.Navigator
     initialRouteName="Register"
-    screenOptions={{ cardStyle: { backgroundColor: 'white' } }}>
+    screenOptions={{ cardStyle: { backgroundColor: 'transparent' } }}>
     <Stack.Screen
       name="Register"
       component={RegisterScreen}
       options={{
-        title: 'Register',
+        title: "",
+        headerShown: false,
       }}
     />
   </Stack.Navigator>
