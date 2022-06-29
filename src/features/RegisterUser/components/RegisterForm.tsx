@@ -1,4 +1,3 @@
-/* eslint-disable prettier/prettier */
 import React, { useState } from 'react';
 import { Alert, Image, TextInput, View } from 'react-native';
 import { useForm, Controller } from 'react-hook-form';
@@ -25,9 +24,19 @@ const schema = yup
   .object({
     completeName: yup.string().required(),
     email: yup.string().email().required(),
-    birthDate: yup.string().required().test('invalid',
-    (date) => moment().diff(moment(date), 'years') >= 18),
-    password: yup.string().required(),
+    birthDate: yup
+      .string()
+      .required()
+      .test('invalid', date => moment().diff(moment(date), 'years') >= 18),
+    password: yup
+      .string()
+      .required()
+      .matches(
+        /^.*(?=.{8,})((?=.*[!@#$%^&*()\-_=+{};:,<.>]){1})(?=.*\d)((?=.*[a-z]){1})((?=.*[A-Z]){1}).*$/,
+        'Password must contain at least 8 characters, one uppercase, one number and one special case character',
+      )
+      .min(8)
+      .max(24),
     confirmPassword: yup
       .string()
       .oneOf([yup.ref('password'), null], 'Passwords must match')
@@ -57,27 +66,24 @@ export const RegisterForm = ({}) => {
   } = useForm<FormData>({
     resolver: yupResolver(schema),
   });
-    const onSubmit = (element: FormData) => {
-      const data = {
-        name: element.completeName,
-        email: element.email,
-        role: 'user',
-        birthDate: element.birthDate,
-        password: element.password,
-      };
-      axios.post('http://192.168.1.4:3000/user', data).then(() => {
-        Alert.alert(
-          'Sucesso',
-          'Seu cadastro foi realizado com sucesso',
-          [
-            {
-              text: 'Fechar',
-              onPress: () => console.log('Cancel Pressed'),
-              style: 'cancel',
-            },
-            { text: 'OK', onPress: () => console.log('OK Pressed') },
-          ]
-        );});
+  const onSubmit = (element: FormData) => {
+    const data = {
+      name: element.completeName,
+      email: element.email,
+      role: 'user',
+      birthDate: element.birthDate,
+      password: element.password,
+    };
+    axios.post('http://192.168.1.4:3000/user', data).then(() => {
+      Alert.alert('Sucesso', 'Seu cadastro foi realizado com sucesso', [
+        {
+          text: 'Fechar',
+          onPress: () => console.log('Cancel Pressed'),
+          style: 'cancel',
+        },
+        { text: 'OK', onPress: () => console.log('OK Pressed') },
+      ]);
+    });
   };
 
   return (
@@ -122,8 +128,7 @@ export const RegisterForm = ({}) => {
         <Typography
           variant="bodySmall"
           color="white"
-          style={{ marginTop: -25, marginBottom: 25 }}
-        >
+          style={{ marginTop: -25, marginBottom: 25 }}>
           Campo obrigatório.
         </Typography>
       )}
@@ -156,8 +161,7 @@ export const RegisterForm = ({}) => {
         <Typography
           variant="bodySmall"
           color="white"
-          style={{ marginTop: -25, marginBottom: 25 }}
-        >
+          style={{ marginTop: -25, marginBottom: 25 }}>
           Campo obrigatório.
         </Typography>
       )}
@@ -165,8 +169,7 @@ export const RegisterForm = ({}) => {
         <Typography
           variant="bodySmall"
           color="white"
-          style={{ marginTop: -25, marginBottom: 25 }}
-        >
+          style={{ marginTop: -25, marginBottom: 25 }}>
           Email em formato errado.
         </Typography>
       )}
@@ -199,8 +202,7 @@ export const RegisterForm = ({}) => {
         <Typography
           variant="bodySmall"
           color="white"
-          style={{ marginTop: -25, marginBottom: 25 }}
-        >
+          style={{ marginTop: -25, marginBottom: 25 }}>
           Campo obrigatório.
         </Typography>
       )}
@@ -208,8 +210,7 @@ export const RegisterForm = ({}) => {
         <Typography
           variant="bodySmall"
           color="white"
-          style={{ marginTop: -25, marginBottom: 25 }}
-        >
+          style={{ marginTop: -25, marginBottom: 25 }}>
           Data de nascimento inválida.
         </Typography>
       )}
@@ -244,8 +245,7 @@ export const RegisterForm = ({}) => {
         <Typography
           variant="bodySmall"
           color="white"
-          style={{ marginTop: -25, marginBottom: 25 }}
-        >
+          style={{ marginTop: -25, marginBottom: 25 }}>
           Campo obrigatório.
         </Typography>
       )}
@@ -280,8 +280,7 @@ export const RegisterForm = ({}) => {
         <Typography
           variant="bodySmall"
           color="white"
-          style={{ marginTop: -25, marginBottom: 25 }}
-        >
+          style={{ marginTop: -25, marginBottom: 25 }}>
           As senhas devem corresponder.
         </Typography>
       )}
@@ -289,8 +288,7 @@ export const RegisterForm = ({}) => {
         <Typography
           variant="bodySmall"
           color="white"
-          style={{ marginTop: -25, marginBottom: 25 }}
-        >
+          style={{ marginTop: -25, marginBottom: 25 }}>
           Campo obrigatório.
         </Typography>
       )}

@@ -1,3 +1,4 @@
+/* eslint-disable react-native/no-inline-styles */
 import React, { useState } from 'react';
 import { Alert, Image, TextInput, View } from 'react-native';
 import { useForm, Controller } from 'react-hook-form';
@@ -23,7 +24,15 @@ const schema = yup
   .object({
     completeName: yup.string().required(),
     email: yup.string().email().required(),
-    password: yup.string().required(),
+    password: yup
+      .string()
+      .required()
+      .matches(
+        /^.*(?=.{8,})((?=.*[!@#$%^&*()\-_=+{};:,<.>]){1})(?=.*\d)((?=.*[a-z]){1})((?=.*[A-Z]){1}).*$/,
+        'Password must contain at least 8 characters, one uppercase, one number and one special case character',
+      )
+      .min(8)
+      .max(24),
     confirmPassword: yup
       .string()
       .oneOf([yup.ref('password'), null], 'Passwords must match')
