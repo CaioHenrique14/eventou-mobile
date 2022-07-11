@@ -1,5 +1,5 @@
-import styled from "styled-components/native";
-import theme from "../../../../shared/theme/theme";
+import styled from 'styled-components/native';
+import theme from '../../../../shared/theme/theme';
 
 export const AddImageButton = styled.TouchableHighlight`
   background-color: ${theme.palette.lightGrey};

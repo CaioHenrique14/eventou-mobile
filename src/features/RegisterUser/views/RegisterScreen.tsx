@@ -1,23 +1,22 @@
-import { StackScreenProps } from "@react-navigation/stack";
-import React, { useState } from "react";
-import { ImageBackground, View } from "react-native";
-import Typography from "../../../shared/components/Typography/Typography";
-import { RootStackParamList } from "~/app/navigation/RegisterFeature";
-import TouchableButton from "../../../shared/components/TouchableButton/TouchableButton";
+import { StackScreenProps } from '@react-navigation/stack';
+import React, { useState } from 'react';
+import { ImageBackground } from 'react-native';
+import Typography from '../../../shared/components/Typography/Typography';
+import { RootStackParamList } from '../../../app/navigation/RegisterFeature';
 import {
   RegisterFormContainer,
   RegisterHeaderContainer,
   RegisterScreenContainer,
-} from "./RegisterScreen.styled";
-import { RegisterForm } from "../components/RegisterForm";
-import { ScrollView, TouchableOpacity } from "react-native-gesture-handler";
-import { RegisterOrganizationForm } from "../components/RegisterOrganizationForm";
-import FormTypeSelector from "../components/FormTypeSelector/FormTypeSelector";
-import { FormSelectorView } from "../components/FormSelectorView/FormSelector.styled";
-type RegisterScreenProps = StackScreenProps<RootStackParamList, "Register">;
+} from './RegisterScreen.styled';
+import { RegisterForm } from '../components/RegisterForm';
+import { ScrollView, TouchableOpacity } from 'react-native-gesture-handler';
+import { RegisterOrganizationForm } from '../components/RegisterOrganizationForm';
+import FormTypeSelector from '../components/FormTypeSelector/FormTypeSelector';
+import { FormSelectorView } from '../components/FormSelectorView/FormSelector.styled';
+type RegisterScreenProps = StackScreenProps<RootStackParamList, 'Register'>;
 
 export const RegisterScreen: React.FC<RegisterScreenProps> = ({}) => {
-  const [formType, setFormType] = useState("user");
+  const [formType, setFormType] = useState('user');
   const [activeUser, setActiveUser] = useState(true);
   const [activeOrg, setActiveOrg] = useState(false);
 
@@ -25,9 +24,8 @@ export const RegisterScreen: React.FC<RegisterScreenProps> = ({}) => {
     <ScrollView>
       <RegisterScreenContainer>
         <ImageBackground
-          source={require("../assets/background.png")}
-          resizeMode="cover"
-        >
+          source={require('../assets/background.png')}
+          resizeMode="cover">
           <RegisterHeaderContainer>
             <Typography variant="headingDisplay" color="white" semiBold>
               Olá,
@@ -40,27 +38,24 @@ export const RegisterScreen: React.FC<RegisterScreenProps> = ({}) => {
           <FormSelectorView>
             <TouchableOpacity
               onPress={() => {
-                setFormType("user");
+                setFormType('user');
                 setActiveUser(!activeUser);
                 setActiveOrg(false);
-              }}
-            >
+              }}>
               <FormTypeSelector text="Usuário" actived={activeUser} />
             </TouchableOpacity>
             <TouchableOpacity
               onPress={() => {
-                setFormType("org");
+                setFormType('org');
                 setActiveOrg(!activeOrg);
                 setActiveUser(false);
-              }}
-            >
+              }}>
               <FormTypeSelector text="Organizador" actived={activeOrg} />
             </TouchableOpacity>
           </FormSelectorView>
         </ImageBackground>
         <RegisterFormContainer>
-          
-          {formType === "user" ? (
+          {formType === 'user' ? (
             <RegisterForm />
           ) : (
             <RegisterOrganizationForm />

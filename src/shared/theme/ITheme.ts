@@ -4,6 +4,8 @@ export interface IPalette {
   blue: string;
   darkGrey: string;
   lightGrey: string;
+  mediumGrey: string;
+  headerGrey: string;
 }
 export interface ISpacing {
   s1: string;
