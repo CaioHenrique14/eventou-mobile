@@ -20,7 +20,7 @@ export const RegisterScreen: React.FC<RegisterScreenProps> = ({}) => {
   const [formType, setFormType] = useState("user");
   const [activeUser, setActiveUser] = useState(true);
   const [activeOrg, setActiveOrg] = useState(false);
-
+  
   return (
     <ScrollView>
       <RegisterScreenContainer>
