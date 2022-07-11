@@ -19,7 +19,7 @@ const RegisterFeatureNavigation = () => (
       name="Register"
       component={RegisterScreen}
       options={{
-        title: "",
+        title: '',
         headerShown: false,
       }}
     />
