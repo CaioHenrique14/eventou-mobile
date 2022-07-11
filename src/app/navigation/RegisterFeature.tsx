@@ -1,12 +1,13 @@
 import React from 'react';
 import { createStackNavigator } from '@react-navigation/stack';
 import { RegisterScreen } from '../../features/RegisterUser/views/RegisterScreen';
+import { CreateEventScreen } from '../../features/CreateEvent/views/CreateEventScreen';
 import { LoginScreen } from '../../features/LoginUser/views/LoginScreen';
-import theme from '~/shared/theme/theme';
 
 export type RootStackParamList = {
   Register: undefined;
   Login: undefined;
+  CreateEvent: undefined;
 };
 
 const Stack = createStackNavigator<RootStackParamList>();
@@ -27,7 +28,13 @@ const RegisterFeatureNavigation = () => (
       name="Login"
       component={LoginScreen}
       options={{
-        title: "",
+        title: "",}}
+    />
+    <Stack.Screen 
+      name="CreateEvent"
+      component={CreateEventScreen}
+      options={{
+        title: '',
         headerShown: false,
       }}
     />

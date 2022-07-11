@@ -1,15 +1,17 @@
-import { DefaultTheme } from "styled-components";
+import { DefaultTheme } from 'styled-components';
 
 const theme: DefaultTheme = {
   palette: {
     black: '#000',
     white: '#fff',
-    blue:'#00AFE7',
-    darkGrey:'#131313',
-    lightGrey:'#3F3D3D'
+    blue: '#00AFE7',
+    darkGrey: '#131313',
+    lightGrey: '#3F3D3D',
+    mediumGrey: '#121212',
+    headerGrey: '#1D1C1C',
   },
   background: {
-    default: '#fff',
+    default: '#121212',
   },
   text: {
     light: '#fff',
@@ -31,7 +33,7 @@ const theme: DefaultTheme = {
       fontFamily: 'Dosis',
       fontStyle: 'normal',
       fontWeight: '400',
-      fontSize: '36px',
+      fontSize: '32px',
       lineHeight: '50px',
     },
     headingMedium: {
@@ -52,7 +54,7 @@ const theme: DefaultTheme = {
       fontFamily: 'Dosis',
       fontStyle: 'normal',
       fontWeight: '400',
-      fontSize: '20px',
+      fontSize: '23px',
       lineHeight: '28px',
     },
     subHeadline: {
@@ -107,5 +109,4 @@ const theme: DefaultTheme = {
   },
 };
 
-
-export default theme
+export default theme;
