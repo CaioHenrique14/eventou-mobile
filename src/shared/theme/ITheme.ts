@@ -6,6 +6,8 @@ export interface IPalette {
   lightGrey: string;
   mediumGrey: string;
   headerGrey: string;
+  textGrey: string;
+
 }
 export interface ISpacing {
   s1: string;

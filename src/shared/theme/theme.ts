@@ -9,6 +9,7 @@ const theme: DefaultTheme = {
     lightGrey: '#3F3D3D',
     mediumGrey: '#121212',
     headerGrey: '#1D1C1C',
+    textGrey: '#959595',
   },
   background: {
     default: '#121212',

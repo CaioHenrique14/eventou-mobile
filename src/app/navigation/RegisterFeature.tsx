@@ -28,7 +28,9 @@ const RegisterFeatureNavigation = () => (
       name="Login"
       component={LoginScreen}
       options={{
-        title: "",}}
+        title: '',
+        headerShown: false,
+      }}
     />
     <Stack.Screen 
       name="CreateEvent"
