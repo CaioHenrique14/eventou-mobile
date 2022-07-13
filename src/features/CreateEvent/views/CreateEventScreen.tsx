@@ -7,6 +7,8 @@ import BoxContent from '../../../shared/components/BoxContent/BoxContent';
 import { ReturnButton } from './CreateEvent.styled';
 import { Image } from 'react-native';
 import { CreateEventHeader } from '../components/createEventHeader/createEventHeader';
+import { AddEventImage } from '../components/addEventImage/addEventImage';
+import { CreateEventForm } from '../components/createEventForm/createEventForm';
 type RegisterScreenProps = StackScreenProps<RootStackParamList, 'Register'>;
 
 export const CreateEventScreen: React.FC<RegisterScreenProps> = ({}) => {
@@ -25,6 +27,7 @@ export const CreateEventScreen: React.FC<RegisterScreenProps> = ({}) => {
         </BoxContent>
 
         <CreateEventHeader eventCreator="Bar Cultural" />
+        <CreateEventForm />
       </BoxContent>
     </ScrollView>
   );

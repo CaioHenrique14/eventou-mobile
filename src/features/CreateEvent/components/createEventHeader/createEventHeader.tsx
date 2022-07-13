@@ -2,8 +2,7 @@ import React from 'react';
 import Typography from '../../../../shared/components/Typography/Typography';
 import BoxContent from '../../../../shared/components/BoxContent/BoxContent';
 import { Image } from 'react-native';
-import { HeaderContentSC } from './createEventHeader.styled';
-import { TextInput } from 'react-native-gesture-handler';
+import { HeaderContentSC, TextInputSC } from './createEventHeader.styled';
 
 export interface IHeaderProps {
   eventCreator: string;
@@ -14,9 +13,7 @@ export const CreateEventHeader: React.FC<IHeaderProps> = ({}) => {
     <HeaderContentSC bg="headerGrey" pad="12 22 12 22" inline>
       <Image source={require('../../assets/userIcon.png')} />
       <BoxContent pad="0 0 0 20">
-        <Typography variant="headline" color="white" bold>
-          <TextInput />
-        </Typography>
+        <TextInputSC placeholder="Nome do evento" />
         <Typography variant="bodyLarge" color="white">
           Bar Cultural
         </Typography>
